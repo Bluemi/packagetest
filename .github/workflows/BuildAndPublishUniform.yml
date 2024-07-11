@@ -39,8 +39,6 @@ jobs:
     # building package on linux
     - name: Build Wheels (cibuildwheel)
       run: cibuildwheel --archs auto64 --output-dir dist
-      env:
-        FORCE_AVX2: "1"
 
     # upload artifacts
     # - name: Upload Build Artifacts
