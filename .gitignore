@@ -2,5 +2,6 @@ __pycache__
 /cpplib
 /dist
 /wheelhouse
+/build
 *.egg-info
 *.so
