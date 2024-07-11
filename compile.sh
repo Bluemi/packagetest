@@ -11,6 +11,9 @@ case "$1" in
 		cd build
 		make -j 6
 		;;
+	ci)
+		cibuildwheel --archs auto64 --output-dir dist
+		;;
 	c)
 		if [ ! -d build ]; then
 			mkdir build

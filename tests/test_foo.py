@@ -1,5 +1,5 @@
-import deglib
+import packagetest
 
 
 def test_foo_func():
-    deglib.foo()
+    packagetest.foo()
