@@ -1,0 +1,6 @@
+__pycache__
+/cpplib
+/dist
+/wheelhouse
+*.egg-info
+*.so
