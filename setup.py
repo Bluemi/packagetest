@@ -149,7 +149,7 @@ class CMakeBuild(build_ext):
         if not build_temp.exists():
             build_temp.mkdir(parents=True)
 
-        print('python interpreter in setup.py:', sys.executable)
+        print('python interpreter in setup.py:', sys.executable, sys.version)
         print('calling cmake')
         call_cmake_checked(
             ["cmake", ext.sourcedir, '-Dpybind11_DIR={}'.format(pybind11.get_cmake_dir()), *cmake_args],
