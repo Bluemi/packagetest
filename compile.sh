@@ -13,8 +13,9 @@ case "$1" in
 		;;
 	ci)
 		rm -rfv dist
-		cibuildwheel --archs auto64 --output-dir dist
+		# cibuildwheel --archs auto64 --output-dir dist
 		# FORCE_AVX2=1 cibuildwheel --archs auto64 --output-dir dist
+		CIBW_BUILD_FRONTEND="pip; args: --verbose" CIBW_ENVIRONMENT="FORCE_AVX2=1" cibuildwheel --output-dir dist --only cp311-manylinux_x86_64
 		;;
 	c)
 		if [ ! -d build ]; then
