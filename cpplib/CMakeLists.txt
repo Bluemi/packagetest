@@ -30,7 +30,7 @@ if (APPLE AND CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64")
 endif()
 
 if (FORCE_AVX2)
-  message(NOTICE "Compiling for avx2, ignoring native optimizations.")
+  message(NOTICE "--- Compiling for avx2, ignoring native optimizations. ---")
   # setup compiler flags
   if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(
@@ -69,6 +69,8 @@ if (FORCE_AVX2)
   endif()
 
 else()  # Native build
+  message(NOTICE "--- Compiling for native ---")
+
   list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules")
   include(DetectCPUFeatures)
 

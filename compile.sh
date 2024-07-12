@@ -12,6 +12,7 @@ case "$1" in
 		make -j 6
 		;;
 	ci)
+		rm -rfv dist
 		cibuildwheel --archs auto64 --output-dir dist
 		;;
 	c)
