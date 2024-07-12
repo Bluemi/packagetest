@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.19)
 
 # Only interpret if() arguments as variables or keywords when unquoted. More
 # details run "cmake --help-policy CMP0054"
-cmake_policy(SET CMP0054 NEW)
+# cmake_policy(SET CMP0054 NEW)
 
 project(
   packagetest

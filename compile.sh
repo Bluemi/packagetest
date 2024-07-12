@@ -14,6 +14,7 @@ case "$1" in
 	ci)
 		rm -rfv dist
 		cibuildwheel --archs auto64 --output-dir dist
+		# FORCE_AVX2=1 cibuildwheel --archs auto64 --output-dir dist
 		;;
 	c)
 		if [ ! -d build ]; then
