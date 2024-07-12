@@ -43,4 +43,3 @@ case "$1" in
 		echo "invalid option"
 		;;
 esac
-
