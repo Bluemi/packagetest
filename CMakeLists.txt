@@ -2,6 +2,9 @@
 cmake_minimum_required(VERSION 3.19)
 project(packagetest_cpp)
 
+# Add python TODO: maybe remove
+find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
+
 # Add pybind11
 find_package(pybind11 CONFIG REQUIRED)
 
