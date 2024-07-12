@@ -3,9 +3,9 @@ cmake_minimum_required(VERSION 3.19)
 project(packagetest_cpp)
 
 # Ensure python: This is necessary to build correctly
-# if(DEFINED PYTHON_EXECUTABLE)
-#     set(Python_EXECUTABLE ${PYTHON_EXECUTABLE})
-# endif()
+if(DEFINED PYTHON_EXECUTABLE)
+    set(Python_EXECUTABLE ${PYTHON_EXECUTABLE})
+endif()
 find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
 message(STATUS "Python executable: ${Python_EXECUTABLE}")
 
