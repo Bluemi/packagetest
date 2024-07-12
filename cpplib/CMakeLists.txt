@@ -29,7 +29,6 @@ if (APPLE AND CMAKE_SYSTEM_PROCESSOR STREQUAL "arm64")
   message(WARNING "You are compiling on an Apple M chip. At the moment does not support ARM optimizations, so using will be slow!")
 endif()
 
-if (FORCE_AVX2)
   message(NOTICE "--- Compiling for avx2, ignoring native optimizations. ---")
   # setup compiler flags
   if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -67,55 +66,6 @@ if (FORCE_AVX2)
   else()
     message(WARNING "Unknown compiler for AVX2 Build: ${CMAKE_CXX_COMPILER_ID}")
   endif()
-
-else()  # Native build
-  message(NOTICE "--- Compiling for native ---")
-
-  list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_modules")
-  include(DetectCPUFeatures)
-
-  # setup compiler flags
-  if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    target_compile_options(
-      compile-options
-      INTERFACE -O2
-                -march=native
-                -fpic
-                -fopenmp)
-  elseif(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
-    target_compile_options(
-      compile-options
-      INTERFACE -O2
-                -DNDEBUG
-                -march=native
-                -fpic)
-  elseif(MSVC)
-    # warning level 4 (show all)
-    target_compile_options(compile-options INTERFACE /W4)
-
-    option(KEEP_DEBUG_SYMBOLS "Whether to compile with /Zi and /DEBUG" off)
-    if(KEEP_DEBUG_SYMBOLS)
-      target_compile_options(compile-options INTERFACE /Zi)
-      target_link_options(compile-options INTERFACE /DEBUG)
-    endif()
-
-    # detecting SUPPORT_AVX2 or SSE2 support
-    cmake_host_system_information(RESULT SUPPORT_SSE2 QUERY HAS_SSE2)
-    if(SUPPORT_AVX2)
-      target_compile_options(compile-options INTERFACE /arch:AVX2)
-    elseif(SUPPORT_SSE2)
-      target_compile_options(compile-options INTERFACE /arch:SSE2)
-    else()
-      target_compile_options(compile-options INTERFACE /arch:native)
-    endif()
-
-    # disable string optimizations and function level linking
-    # https://stackoverflow.com/questions/5063334/what-is-the-difference-between-the-ox-and-o2-compiler-options
-    target_compile_options(compile-options INTERFACE $<$<CONFIG:Release>:/Ox>)
-  else()
-    message(WARNING "Unknown compiler: ${CMAKE_CXX_COMPILER_ID}")
-  endif()
-endif()
 
 message("C++ compiler flags: ${CMAKE_CXX_FLAGS}")
 message("C++ compiler flags release: ${CMAKE_CXX_FLAGS_RELEASE}")
