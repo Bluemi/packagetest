@@ -4,6 +4,7 @@ project(packagetest_cpp)
 
 # Ensure python: This is necessary to build correctly
 find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
+message(STATUS "Python executable: ${Python_EXECUTABLE}")
 
 # Add pybind11
 find_package(pybind11 CONFIG REQUIRED)
